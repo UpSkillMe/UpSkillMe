@@ -36,13 +36,14 @@ export default function ProfilePage({
     const [closeButtonDisplay, setCloseButtonDisplay] = React.useState(
         "inline-block"
     );
-    const [project, setProject] = React.useState('');
+    const [filterProject, setFilterProject] = React.useState('');
     const [activityName, setActivityName] = React.useState("");
     const [activityType, setActivityType] = React.useState(["recbt3yRDLY9GjPc2"]);
     const [badgeValues, setBadgeValues] = React.useState([]);
     const [date, setDate] = React.useState("");
     const [duration, setDuration] = React.useState(1);
     const [supportingInfo, setSupportingInfo] = React.useState("");
+    const [Project, setProject] = React.useState('FALSE');
     const [copyActivity, setCopyActivity] = React.useState(false);
 
 
@@ -146,8 +147,8 @@ export default function ProfilePage({
 
             <Activites
                 activities={data}
-                project={project}
-                setProject={setProject}
+                filterProject={filterProject}
+                setFilterProject={setFilterProject}
                 isFormDisplayed={isFormDisplayed}
                 setFormDisplayed={setFormDisplayed}
                 activityButtonDisplay={activityButtonDisplay}
@@ -167,6 +168,8 @@ export default function ProfilePage({
                 badgeValues={badgeValues}
                 setBadgeValues={setBadgeValues}
                 setCopyActivity={setCopyActivity}
+                Project={Project}
+                setProject={setProject}
             />
             <EventForm
                 setDataRefresh={setDataRefresh}
@@ -193,6 +196,8 @@ export default function ProfilePage({
                 setBadgeValues={setBadgeValues}
                 setCopyActivity={setCopyActivity}
                 copyActivity={copyActivity}
+                Project={Project}
+                setProject={setProject}
             />
 
             <ActivityButton

@@ -1,90 +1,11 @@
 import React from "react";
 import skillsConverter from "../../utils/skillsConverter";
 import activityConverter from "../../utils/activityConverter";
-import styled from "styled-components";
 import ActivityButton from "../add-activity-button/ActivityButton";
 import CloseButton from "../close-button/CloseButton";
-
-//Styled components
-const FormStyle = styled.form`
-  display: ${props => props.formDisplay};
-  max-width: 90%;
-  margin: 10px;
-  position: relative;
-  background: #ffffff;
-  margin: 0 auto 1%;
-  padding: 3%;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-`;
-
-const Label = styled.label`
-  display: block;
-  font-size: 1.2rem;
-  margin-bottom: 2.5%;
-`;
-
-const Input = styled.input`
-  display: block;
-  width: 90%;
-
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 2.5%;
-  padding: 1.5%;
-  box-sizing: border-box;
-  font-size: 1.2rem;
-`;
-
-const TextArea = styled.textarea`
-  display: block;
-  width: 90%;
-
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 2.5%;
-  padding: 1.5%;
-  box-sizing: border-box;
-  font-size: 1.2rem;
-`;
-
-// font-family: "Nunito", sans-serif;
-
-const Select = styled.select`
-  display: block;
-  width: 95%;
-`;
-
-const Submit = styled.input`
-  font-family: "Nunito", sans-serif;
-  font-size: 1.5rem;
-  background-color: rgb(16,156,241);
-  color: white;
-  border-radius: 5px;
-  height: 50px;
-  width: 140px;
-  text-align: center;
-  text-decoration: none;
-  padding: 1%;
-  border-radius: 5px;
-  display: block;
-  transition: all 0.4s ease 0s;
-  cursor: pointer;
-
-  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
-
-  :hover {
-    background: #434343;
-    letter-spacing: 1px;
-    -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-    -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-    box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
-    transition: all 0.4s ease 0s;
-  }
-`;
+import {FormStyle, Input, Label, Select, Submit, TextArea} from "./EventForm.style";
+import Activites from "../activities/Activities";
+import ProjectRadioButtons from "../project-radio-buttons/ProjectRadioButtons";
 
 const hexColourNameMap = {
     '#37d67a': 'Green',
@@ -119,7 +40,9 @@ export default function EventForm({
                                       badgeValues,
                                       setBadgeValues,
                                       setCopyActivity,
-                                      copyActivity
+                                      copyActivity,
+                                      Project,
+                                      setProject
                                   }) {
 
     const [formDisplay, setFormDisplay] = React.useState(isFormDisplayed);
@@ -223,7 +146,8 @@ export default function EventForm({
                                 schoolEmail: emailInput,
                                 skills: skillsConverter(badgeValues),
                                 pass: passwordInput,
-                                colour: colour
+                                colour: colour,
+                                Project: Project
                             }
                         }
                     ]
@@ -241,7 +165,8 @@ export default function EventForm({
                                 schoolEmail: emailInput,
                                 skills: skillsConverter(badgeValues),
                                 pass: passwordInput,
-                                colour: colour
+                                colour: colour,
+                                Project: Project
                             }
                         }
                     ]
@@ -252,7 +177,7 @@ export default function EventForm({
                 `/.netlify/functions/CreateUserActivity?activityData=${submittedData}`
             )
                 .then(res => res.json())
-                .then(res => {
+                .then(() => {
                     setDataRefresh(true);
                 });
         }
@@ -264,10 +189,11 @@ export default function EventForm({
         setDuration(1);
         setSupportingInfo("");
         setBadgeValues([]);
+        setProject('FALSE');
 
-         if(copyActivity === true) {
-             setCopyActivity(false);
-         }
+        if (copyActivity === true) {
+            setCopyActivity(false);
+        }
         alert("Well done, you've added your skill block!");
         e.preventDefault();
     };
@@ -371,6 +297,18 @@ export default function EventForm({
                         onChange={e => setSupportingInfo(e.target.value)}
                     />
                 </Label>
+                <Label style={{marginBottom: '0.5%'}}>
+                    Is this activity part of a longer term project?
+                    <br/>
+                    <ProjectRadioButtons
+                        switches={[
+                            {value: "TRUE", label: '  Yes  '},
+                            {value: "FALSE", label: '  No  '}
+                        ]}
+                        selected={Project}
+                        onChange={(val) => setProject(val)}
+                    />
+                </Label>
                 <Submit type="submit" value="Submit"/>
             </FormStyle>
         );
@@ -386,7 +324,7 @@ export default function EventForm({
                     activityButtonDisplay={activityButtonDisplay}
                     setActivityButtonDisplay={setActivityButtonDisplay}
                 />
-                <h2>Repeat activity</h2>
+                <h2>{ Project === 'TRUE' ? "Repeat Project" :"Repeat activity" }</h2>
                 <Label>
                     Name of Activity:
                     <Input

@@ -29,7 +29,11 @@ const RepeatActivityButtonStyle = styled.button`
     background: #109cf1;
     border-color: #109cf1 !important;
     transition: all 0.4s ease 0s;
-
+    .repeat-activity {
+        filter: brightness(0) invert(1);
+        transition: all 0.1s ease 0s;
+    }
+    
   }
 `;
 
@@ -52,7 +56,9 @@ export default function RepeatActivityButton({
                                                  setActivityType,
                                                  badgeValues,
                                                  setBadgeValues,
-                                                 setCopyActivity
+                                                 setCopyActivity,
+                                                 Project,
+                                                 setProject
                                              }) {
     function handleShowAddActivityForm(e) {
         setFormDisplayed("block");
@@ -65,18 +71,20 @@ export default function RepeatActivityButton({
         setDate(date);
         setBadgeValues(badgeValues);
         setDuration(duration);
-
         setSupportingInfo(supportingInfo);
-
+        setProject(Project);
         setCloseButtonDisplay(closeButtonDisplay === "block" ? "none" : "block");
         scroll.scrollToBottom();
     }
 
-    return (
-        <RepeatActivityButtonStyle
-            onClick={handleShowAddActivityForm}
-        >
-            Repeat Activity <br></br> ()
-        </RepeatActivityButtonStyle>
-    );
+    return <RepeatActivityButtonStyle onClick={handleShowAddActivityForm}>
+        {Project === 'FALSE' ? "Repeat Activity" : "Repeat Project"}
+        <br/>
+        <img
+            className={"repeat-activity"}
+            src={`assets/RepeatActivity.svg`}
+            alt="info image"
+            width="30px"
+        />
+    </RepeatActivityButtonStyle>;
 }

@@ -9,8 +9,8 @@ import EventForm from "../add-event-form/EventForm";
 
 export default function Activities({
                                        activities,
-                                       project,
-                                       setProject,
+                                       filterProject,
+                                       setFilterProject,
                                        isFormDisplayed,
                                        setFormDisplayed,
                                        activityButtonDisplay,
@@ -29,13 +29,15 @@ export default function Activities({
                                        setActivityType,
                                        badgeValues,
                                        setBadgeValues,
-                                       setCopyActivity
+                                       setCopyActivity,
+                                       Project,
+                                       setProject
                                    }) {
     if (!activities) {
         return <h3> Activities not loaded...</h3>;
     }
 
-    if (project === '') {
+    if (filterProject === '') {
         return (
             <div>
                 <H2>Activity log</H2>
@@ -46,15 +48,15 @@ export default function Activities({
 
                     <FilterActivitiesButton
                         key={'FALSE'}
-                        project={'FALSE'}
-                        setProject={setProject}
+                        filterProject={'FALSE'}
+                        setFilterProject={setFilterProject}
                     >
                     </FilterActivitiesButton>
 
                     <FilterActivitiesButton
                         key={'TRUE'}
-                        project={'TRUE'}
-                        setProject={setProject}
+                        filterProject={'TRUE'}
+                        setFilterProject={setFilterProject}
                     >
                     </FilterActivitiesButton>
 
@@ -86,6 +88,8 @@ export default function Activities({
                             badgeValues={badgeValues}
                             setBadgeValues={setBadgeValues}
                             setCopyActivity={setCopyActivity}
+                            Project={Project}
+                            setProject={setProject}
                         />
                     );
                 })}
@@ -96,28 +100,28 @@ export default function Activities({
             <div>
                 <H2>Activity log</H2>
                 <H3>
-                    Displaying {activities.filter((x) => x.fields.Project === project).length} of {activities.length}
+                    Displaying {activities.filter((x) => x.fields.Project === filterProject).length} of {activities.length}
                 </H3>
                 <ButtonDiv>
 
                     <FilterActivitiesButton
                         key={'FALSE'}
-                        project={'FALSE'}
-                        setProject={setProject}
+                        filterProject={'FALSE'}
+                        setFilterProject={setFilterProject}
                     >
                     </FilterActivitiesButton>
 
                     <FilterActivitiesButton
                         key={'TRUE'}
-                        project={'TRUE'}
-                        setProject={setProject}
+                        filterProject={'TRUE'}
+                        setFilterProject={setFilterProject}
                     >
                     </FilterActivitiesButton>
 
                 </ButtonDiv>
 
                 {activities
-                    .filter((x) => x.fields.Project === project)
+                    .filter((x) => x.fields.Project === filterProject)
                     .map((activity, index) => {
                         return (
                             <Activity
@@ -144,6 +148,8 @@ export default function Activities({
                                 badgeValues={badgeValues}
                                 setBadgeValues={setBadgeValues}
                                 setCopyActivity={setCopyActivity}
+                                Project={Project}
+                                setProject={setProject}
                             />
                         );
                     })}
