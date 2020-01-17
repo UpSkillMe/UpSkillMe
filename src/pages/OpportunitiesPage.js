@@ -31,10 +31,8 @@ export default function OpportunitiesPage({
                     });
                     setOpportunities(res.records);
                     //  setCategory(res.records[0].fields.Category);
-                    console.log("set category", category);
                     const uniqueItems = (x, i, array) => array.indexOf(x) === i;
                     setCategories(res.records.map(prod => prod.fields.Category).filter(uniqueItems));
-                    console.log("set categories", res.records.map(prod => prod.fields.Category).filter(uniqueItems))
                 }
             });
     }, []);

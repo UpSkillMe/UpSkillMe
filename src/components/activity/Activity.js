@@ -55,13 +55,13 @@ export default function Activity({
                     setProject={setProject}
                 >
                 </RepeatActivityButton>
-                <H3 style={{ marginLeft: '5rem'}}> Activity name: {activity.fields.nameOfActivity} </H3>
+                <H3 style={{marginLeft: '5rem'}}> Activity name: {activity.fields.nameOfActivity} </H3>
                 <br></br>
-                <li style={{ marginLeft: '5rem'}}>Completed {activity.fields.daysAgo} days ago</li>
+                <li style={{marginLeft: '5rem'}}>Completed {activity.fields.daysAgo} days ago</li>
                 <br></br>
-                <li style={{ marginLeft: '5rem'}}>Total hours: {activity.fields.durationHours} </li>
+                <li style={{marginLeft: '5rem'}}>Total hours: {activity.fields.durationHours} </li>
                 <Hr/>
-                <li >
+                <li>
                     <ActivityBadges selectedBadges={activity.fields.skills} data={activities}/>
                 </li>
                 <li>

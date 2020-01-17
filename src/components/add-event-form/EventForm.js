@@ -1,21 +1,9 @@
 import React from "react";
 import skillsConverter from "../../utils/skillsConverter";
 import activityConverter from "../../utils/activityConverter";
-import ActivityButton from "../add-activity-button/ActivityButton";
 import CloseButton from "../close-button/CloseButton";
 import {FormStyle, Input, Label, Select, Submit, TextArea} from "./EventForm.style";
-import Activites from "../activities/Activities";
 import ProjectRadioButtons from "../project-radio-buttons/ProjectRadioButtons";
-import RepeatActivityButton from "../repeat-activity-button/RepeatActivityButton";
-
-const hexColourNameMap = {
-    '#37d67a': 'Green',
-    '#2ccce4': 'Blue',
-    '#555555': 'Black',
-    '#dce775': 'Yellow',
-    '#ff8a65': 'Orange',
-    '#ba68c8': 'Pink'
-};
 
 export default function EventForm({
                                       setDataRefresh,
@@ -59,16 +47,6 @@ export default function EventForm({
         "Technology"
     ];
 
-    const skills = {
-        Communication: "rec1aXpu34QFpVnDc",
-        Creativity: "recilXHxEAlJqZFeu",
-        Innovation: "recQtkW5IWh0z3tH5",
-        Leadership: "reczDCLXfOC5iHLiQ",
-        Media: "recSIsNHGiRbV8CR7",
-        "Problem solving": "recOt8tI1ZLivhoZV",
-        Teamwork: "recTHKDy3NJghbCrJ",
-        Technology: "recVncOYn99qVNwir"
-    };
 
     // const emptyBadgeOptions = React.useState(badgeOptions);
     // if(badgeOptions !== null && badgeOptions.length === 3) {
@@ -173,7 +151,6 @@ export default function EventForm({
                     ]
                 });
             }
-            console.log('submittedData', submittedData);
             fetch(
                 `/.netlify/functions/CreateUserActivity?activityData=${submittedData}`
             )
