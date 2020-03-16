@@ -123,10 +123,9 @@ export default function ForgotPasswordForm({setPageState}) {
                                   }}
                     />
                     <p style={{color: currentColour}}>{hexColourNameMap[currentColour]}</p>
-                    <p style={{color: "#787881"}}>Select the color remember picking. If you can't do this then let your
-                        teacher know.</p>
-                    <p style={{color: "#787881"}}>Alternatively send us an email to info@appskillme.io from your school
-                        email and we'll reset it for you.</p>
+                    <p style={{color: "#787881"}}>Enter your email and select the you color remember picking when you signed up.</p>
+                    <p style={{color: "#787881"}}>Alternatively send us an email to info@upskillme.io from your registered school
+                        email and we'll be in touch to reset it for you.</p>
                     <Input style={{marginTop: "50px"}} type="submit"/>
                 </SimpleForm>
             </section>
