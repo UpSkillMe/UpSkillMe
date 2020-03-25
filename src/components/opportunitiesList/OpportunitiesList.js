@@ -49,7 +49,7 @@ export default function OpportunitiesList({opportunities, category, setCategory,
     } else {
         return (
             <div>
-                <H2>Up Skill Opportunities</H2>
+                <H2>Up Skill Me Opportunities</H2>
                 <H3>
                     Develop skills for your future success
                 </H3>
